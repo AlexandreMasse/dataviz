@@ -22,17 +22,30 @@ body > div {
 p {
   position: absolute;
   top: 10px;
+  font-size: 25px;
+  span {
+    font-weight: 700;
+  }
+
 
   &#year {
     left: 20px;
   }
 
   &#population {
-    left:300px;
+    left:200px;
   }
 
   &#arbre {
-    left:600px;
+    left:500px;
+  }
+
+  &#timer {
+    left:800px;
+  }
+
+  &#timerArbre {
+    left:1000px;
   }
 
 }

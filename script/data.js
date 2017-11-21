@@ -80,29 +80,3 @@ Data.prototype = {
     }
 
 };
-
-
-let nbArbre = 3040 * Math.pow(10,9);
-let nbPopulation = 7200220411.68203;
-let surfaceForest = 39991336.2; //Km2
-
-let density = nbArbre / surfaceForest;
-console.log(nbArbre);
-console.log(density);
-console.log(nbArbre/nbPopulation);
-
-console.log((surfaceForest * density) / nbPopulation);
-
-
-//console.log(surfaceForest * density);
-
-
-/*
-* nbArbre / nbPopulation = 422
-*
-* surfaceForest * density = nbArbre
-*
-* density = nbArbre / surfaceforest
-*
-*
-* */

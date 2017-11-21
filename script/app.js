@@ -3,6 +3,7 @@ function App() {
     this.yearIndex = 0;
     this.nbImg = 50;
     this.zIndex = 1;
+    this.timer = 0;
 
     //Data
     this.data = new Data();
@@ -17,6 +18,8 @@ function App() {
     this.populationDataUi = document.querySelector('p#population span');
     this.yearUi = document.querySelector("p#year span");
     this.arbreUi = document.querySelector("p#arbre span");
+    this.timerUi = document.querySelector("p#timer span");
+    this.timerArbreUi = document.querySelector("p#timerArbre span");
 
 }
 
@@ -25,24 +28,39 @@ function App() {
 
 App.prototype = {
 
-    updateUiData(i = this.yearIndex) {
+    setTimer : function () {
+        setInterval(function () {
 
-        let year =  Object.keys(this.populationData)[i];
-        let population = Object.values(this.populationData)[i];
-        let forestArea = Object.values(this.forestData)[i];
+            let currentMinute = Math.floor(this.timer / 60 ).toString();
+            let currentSecond = Math.floor(this.timer % 60);
+
+           //Seconds with 2 numbers
+            currentSecond = currentSecond < 10 ? '0' + currentSecond.toString() : currentSecond.toString();
+
+            this.timerUi.innerText = currentMinute + ":" + currentSecond;
+
+
+
+            this.timerArbreUi.innerText = this.timer * (2400/60);
+
+            this.timer++;
+        }.bind(this), 1000)
+    },
+
+    updateUiData(yearIndex = this.yearIndex) {
+
+        let year =  Object.keys(this.populationData)[yearIndex];
+        let population = Object.values(this.populationData)[yearIndex];
+        let forestArea = Object.values(this.forestData)[yearIndex];
 
         if (year <= 2015){
             //Year
             this.yearUi.innerText = year;
-
             //Population
-            this.populationDataUi.innerText = population;
-
+            this.populationDataUi.innerText = Math.floor(population);
             //Arbres
             this.arbreUi.innerText = Math.floor( ( forestArea * this.density ) / population );
         }
-
-        //console.log((surfaceForest * density) / nbPopulation);
 
     },
 
@@ -52,15 +70,14 @@ App.prototype = {
 
 
     onKeyDown: function(e) {
-        console.log(e);
 
         if (e.code === "Space") {
 
             if (this.imgIndex % 2 === 0){
                 console.log('paire !');
-
-                this.updateUiData(this.yearIndex);
                 this.yearIndex++;
+                this.updateUiData(this.yearIndex);
+
             }
 
             this.body.children[(this.body.children.length - this.imgIndex)].style.zIndex = this.zIndex;
@@ -85,8 +102,11 @@ App.prototype = {
         }
     },
 
+
+
     init: function() {
 
+        this.setTimer();
         this.updateUiData();
         this.addListener();
         this.generateImg();
