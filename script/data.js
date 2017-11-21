@@ -60,6 +60,8 @@ function Data() {
         "2016": ""
     };
 
+    //Density based on 2015 data
+    this.density = ( 3040 * Math.pow(10,9) ) / 39991336.2;
 }
 
 
@@ -71,18 +73,25 @@ Data.prototype = {
 
     getDataForest : function () {
         return this.forest
+    },
+
+    getDensity : function () {
+        return this.density
     }
+
 };
 
 
 let nbArbre = 3040 * Math.pow(10,9);
-let nbPopulation = 5284886348;
-let surfaceForest = 41282694.8; //Km2
+let nbPopulation = 7200220411.68203;
+let surfaceForest = 39991336.2; //Km2
 
 let density = nbArbre / surfaceForest;
 console.log(nbArbre);
 console.log(density);
 console.log(nbArbre/nbPopulation);
+
+console.log((surfaceForest * density) / nbPopulation);
 
 
 //console.log(surfaceForest * density);

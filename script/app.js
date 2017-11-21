@@ -3,42 +3,48 @@ function App() {
     this.yearIndex = 0;
     this.nbImg = 50;
     this.zIndex = 1;
-    this.populationData = {};
-    this.forestData = {};
 
-    //Dom element
+    //Data
+    this.data = new Data();
+    this.populationData = this.data.getDataPopulation();
+    this.forestData = this.data.getDataForest();
+    this.density = this.data.getDensity();
+
+    console.log(this.density);
+
+    //Dom elements
     this.body =  document.querySelector('body');
-    console.dir(this.body);
-    this.populationDataUi = document.querySelector('p.population');
-    this.yearUi = document.querySelector("p#year");
+    this.populationDataUi = document.querySelector('p#population span');
+    this.yearUi = document.querySelector("p#year span");
+    this.arbreUi = document.querySelector("p#arbre span");
 
 }
 
 
 
+
 App.prototype = {
-
-
-    getData : function(){
-        const data = new Data();
-        this.populationData = data.getDataPopulation();
-        this.forestData = data.getDataForest();
-
-        console.log(Object.keys(this.populationData)[0]);
-    },
-
 
     updateUiData(i = this.yearIndex) {
 
-        this.yearUi.innerText = Object.keys(this.populationData)[i];
+        let year =  Object.keys(this.populationData)[i];
+        let population = Object.values(this.populationData)[i];
+        let forestArea = Object.values(this.forestData)[i];
 
-        //this.populationDataUi.innerText = Object.values(this.populationData)[i]
+        if (year <= 2015){
+            //Year
+            this.yearUi.innerText = year;
 
+            //Population
+            this.populationDataUi.innerText = population;
 
+            //Arbres
+            this.arbreUi.innerText = Math.floor( ( forestArea * this.density ) / population );
+        }
 
+        //console.log((surfaceForest * density) / nbPopulation);
 
     },
-
 
     addListener: function() {
         window.addEventListener("keydown", this.onKeyDown.bind(this))
@@ -57,11 +63,8 @@ App.prototype = {
                 this.yearIndex++;
             }
 
-
             this.body.children[(this.body.children.length - this.imgIndex)].style.zIndex = this.zIndex;
             this.zIndex++;
-
-
 
             this.imgIndex++;
 
@@ -70,7 +73,6 @@ App.prototype = {
             }
         }
     },
-
 
     generateImg : function() {
 
@@ -83,11 +85,8 @@ App.prototype = {
         }
     },
 
-
-
     init: function() {
 
-        this.getData();
         this.updateUiData();
         this.addListener();
         this.generateImg();
@@ -95,8 +94,6 @@ App.prototype = {
     },
 
 };
-
-
 
 
 let app = new App();
