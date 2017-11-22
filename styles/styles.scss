@@ -13,11 +13,11 @@ body > div {
   width: 100%;
   height: 100%;
   position: absolute;
-  background-image: url("../img/1.JPG");
+ /* background-image: url("../img/1.JPG");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: fixed;*/
 }
 
 p {
@@ -79,9 +79,19 @@ svg {
   & > g > g {
     display: none;
 
-    &[data-name="5"] {
-      display: initial;
-    }
+  }
+}
+
+
+#trunkAnimation1, #trunkAnimation2, #trunkAnimation3, #trunkAnimation4 {
+  position: absolute;
+  min-height: 101%;
+  width: 200%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  & > div {
+    overflow: visible!important;
   }
 }
 
