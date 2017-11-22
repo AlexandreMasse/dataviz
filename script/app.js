@@ -65,7 +65,7 @@ App.prototype = {
     },
 
     addListener: function() {
-        window.addEventListener("keydown", this.onKeyDown.bind(this))
+        window.addEventListener("keydown", this.throttle(this.onKeyDown.bind(this), 250))
     },
 
 
@@ -80,16 +80,46 @@ App.prototype = {
 
             }
 
-            this.body.children[(this.body.children.length - this.imgIndex)].style.zIndex = this.zIndex;
-            this.zIndex++;
+            if (this.imgIndex <= this.nbImg - 4) {
+                console.log(" svg g[data-name=\"" + (this.imgIndex + 4) + "\"]");
+                document.querySelector("svg g[data-name=\"" + (this.imgIndex + 4) + "\"]").style.display = "none";
+                this.imgIndex++;
+            }
 
-            this.imgIndex++;
+
+           /* this.body.children[(this.body.children.length - this.imgIndex)].style.zIndex = this.zIndex;
+            this.zIndex++;*/
+
+           /*
 
             if (this.imgIndex > this.nbImg) {
                 this.imgIndex = 1
-            }
+            }*/
         }
+
     },
+
+    throttle : function(callback, delay) {
+        var last;
+        var timer;
+        return function () {
+            var context = this;
+            var now = +new Date();
+            var args = arguments;
+            if (last && now < last + delay) {
+                // le délai n'est pas écoulé on reset le timer
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    last = now;
+                    callback.apply(context, args);
+                }, delay);
+            } else {
+                last = now;
+                callback.apply(context, args);
+            }
+        };
+    },
+
 
     generateImg : function() {
 
@@ -109,7 +139,7 @@ App.prototype = {
         this.setTimer();
         this.updateUiData();
         this.addListener();
-        this.generateImg();
+        //this.generateImg();
 
     },
 

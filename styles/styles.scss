@@ -1,11 +1,8 @@
 html, body {
-  padding: 0;
-  margin: 0;
-}
-
-body {
   width: 100vw;
   height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 
 body > div {
@@ -48,4 +45,10 @@ p {
     left:1000px;
   }
 
+}
+
+
+svg {
+  height: 100%;
+  width: 100%;
 }
