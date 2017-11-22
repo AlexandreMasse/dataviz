@@ -18,8 +18,15 @@ function App() {
     this.populationDataUi = document.querySelector('p#population span');
     this.yearUi = document.querySelector("p#year span");
     this.arbreUi = document.querySelector("p#arbre span");
-    this.timerUi = document.querySelector("p#timer span");
+
+    //this.timerUi = document.querySelector("p#timer span");
+    this.timerMinuteUi = document.querySelector("p#timer span#timerMinute");
+    this.timerSecondeDecimalUi = document.querySelector("p#timer span#timerSecondDecimal");
+    this.timerSecondeUnitUi = document.querySelector("p#timer span#timerSecondUnit");
+
+
     this.timerArbreUi = document.querySelector("p#timerArbre span");
+
 
 }
 
@@ -28,16 +35,89 @@ function App() {
 
 App.prototype = {
 
+
+    setOdometer : function () {
+
+        new Odometer({
+            el: this.yearUi,
+            value: 1990,
+            duration: 3000,
+
+            format: '',
+            theme: 'minimal',
+        });
+
+        new Odometer({
+            el: this.populationDataUi,
+            value: 0,
+            duration: 80,
+            format: '',
+            theme: 'minimal',
+        });
+
+        new Odometer({
+            el: this.timerMinuteUi,
+            value: 0,
+            duration: 80,
+            format: '',
+            theme: 'minimal',
+        });
+
+        new Odometer({
+            el: this.timerSecondeDecimalUi,
+            value: 0,
+            duration: 80,
+            format: '',
+            theme: 'minimal',
+        });
+
+
+        new Odometer({
+            el: this.timerSecondeUnitUi,
+            value: 0,
+            duration: 80,
+            format: '',
+            theme: 'minimal',
+        });
+
+         new Odometer({
+            el: this.timerArbreUi,
+            value: 0,
+            duration: 80,
+            format: '',
+            theme: 'minimal',
+        });
+
+
+
+
+
+        //yearUiOdometer.update(555);
+// or
+        //el.innerHTML = 555
+    },
+
     setTimer : function () {
         setInterval(function () {
 
-            let currentMinute = Math.floor(this.timer / 60 ).toString();
+            let currentMinute = Math.floor(this.timer / 60 );
             let currentSecond = Math.floor(this.timer % 60);
 
-           //Seconds with 2 numbers
-            currentSecond = currentSecond < 10 ? '0' + currentSecond.toString() : currentSecond.toString();
 
-            this.timerUi.innerText = currentMinute + ":" + currentSecond;
+            let currentSecondUnit = Math.floor(currentSecond % 10);
+
+            let currentSecondDecimal = Math.floor( currentSecond / 10 );
+
+
+
+           //Seconds with 2 numbers
+            //currentSecond = currentSecond < 10 ? '0' + currentSecond.toString() : currentSecond.toString();
+            //this.timerUi.innerText = currentMinute + ":" + currentSecond;
+
+
+            this.timerMinuteUi.innerText = currentMinute;
+            this.timerSecondeDecimalUi.innerText = currentSecondDecimal;
+            this.timerSecondeUnitUi.innerText = currentSecondUnit;
 
 
 
@@ -46,6 +126,8 @@ App.prototype = {
             this.timer++;
         }.bind(this), 1000)
     },
+
+
 
     updateUiData(yearIndex = this.yearIndex) {
 
@@ -81,8 +163,9 @@ App.prototype = {
             }
 
             if (this.imgIndex <= this.nbImg - 4) {
-                console.log(" svg g[data-name=\"" + (this.imgIndex + 4) + "\"]");
-                document.querySelector("svg g[data-name=\"" + (this.imgIndex + 4) + "\"]").style.display = "none";
+                console.log(" svg g[data-name=\"" + (this.imgIndex + 5) + "\"]");
+                document.querySelector("svg g[data-name=\"" + (this.imgIndex + 5) + "\"]").style.display = "initial";
+                document.querySelector("svg g[data-name=\"" + (this.imgIndex + 5 - 1) + "\"]").style.display = "none";
                 this.imgIndex++;
             }
 
@@ -130,12 +213,14 @@ App.prototype = {
             this.body.appendChild(div)
 
         }
-    },
 
+
+    },
 
 
     init: function() {
 
+        this.setOdometer();
         this.setTimer();
         this.updateUiData();
         this.addListener();
@@ -148,6 +233,8 @@ App.prototype = {
 
 let app = new App();
 app.init();
+
+
 
 
 

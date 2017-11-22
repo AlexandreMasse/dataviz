@@ -5,6 +5,10 @@ html, body {
   margin: 0;
 }
 
+body {
+  overflow : hidden;
+}
+
 body > div {
   width: 100%;
   height: 100%;
@@ -27,10 +31,20 @@ p {
 
   &#year {
     left: 20px;
+
+    .odometer.odometer-animating-up .odometer-ribbon-inner, .odometer.odometer-animating-down.odometer-animating .odometer-ribbon-inner {
+      transition-duration: 0.7s !important
+    }
+
+
   }
 
   &#population {
     left:200px;
+
+    .odometer.odometer-animating-up .odometer-ribbon-inner, .odometer.odometer-animating-down.odometer-animating .odometer-ribbon-inner {
+      transition-duration: 0.7s !important
+    }
   }
 
   &#arbre {
@@ -39,16 +53,35 @@ p {
 
   &#timer {
     left:800px;
+    .odometer.odometer-animating-up .odometer-ribbon-inner, .odometer.odometer-animating-down.odometer-animating .odometer-ribbon-inner {
+      transition-duration: 0.7s !important
+    }
   }
 
   &#timerArbre {
     left:1000px;
+
+    .odometer.odometer-animating-up .odometer-ribbon-inner, .odometer.odometer-animating-down.odometer-animating .odometer-ribbon-inner {
+      transition-duration: 0.7s !important
+    }
   }
 
 }
 
 
 svg {
-  height: 100%;
+  height: 101%;
   width: 100%;
+  position: absolute;
+  top: 50%;
+  transform : translateY(-50%);
+
+  & > g > g {
+    display: none;
+
+    &[data-name="5"] {
+      display: initial;
+    }
+  }
 }
+
