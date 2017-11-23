@@ -21,6 +21,7 @@ body > div {
 }
 
 p {
+  color: white;
   position: absolute;
   top: 10px;
   font-size: 25px;
@@ -69,7 +70,8 @@ p {
 }
 
 
-svg {
+
+svg#trunks {
   height: 101%;
   width: 100%;
   position: absolute;
@@ -83,15 +85,33 @@ svg {
 }
 
 
+/*
+object#trunks {
+  pointer-events: none;
+  height: 101%;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform : translateY(-50%);
+}*/
+
+
 #trunkAnimation1, #trunkAnimation2, #trunkAnimation3, #trunkAnimation4 {
   position: absolute;
   min-height: 101%;
-  width: 200%;
-  left: 50%;
-  transform: translateX(-50%);
 
-  & > div {
-    overflow: visible!important;
+  svg > g {
+    clip-path: none;
   }
 }
 
+
+#background{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  //width: 100%;
+  min-height: 100vh;
+}

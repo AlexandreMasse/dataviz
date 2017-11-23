@@ -24,8 +24,6 @@ function App() {
 
     this.timerArbreUi = document.querySelector("p#timerArbre span");
 
-
-
 }
 
 
@@ -35,72 +33,46 @@ App.prototype = {
     setBodymovin : function () {
 
         this.animation1 = bodymovin.loadAnimation({
-            container: document.getElementById('trunkAnimation1'), // Required
-            path: 'img/tronc_anim1.json', // Required
-            renderer: 'svg/canvas/html', // Required
-            loop: false, // Optional
-            autoplay: false, // Optional
-            name: "animationName", // Name for future reference. Optional.
+            container: document.getElementById('trunkAnimation1'),
+            path: 'img/trunk/tronc_anim1.json',
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            name: "animationName",
         });
 
+
         this.animation2 = bodymovin.loadAnimation({
-            container: document.getElementById('trunkAnimation2'), // Required
-            path: 'img/tronc_anim2.json', // Required
-            renderer: 'svg/canvas/html', // Required
-            loop: false, // Optional
-            autoplay: false, // Optional
-            name: "animationName", // Name for future reference. Optional.
+            container: document.getElementById('trunkAnimation2'),
+            path: 'img/trunk/tronc_anim2.json',
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            name: "animationName",
         });
 
         this.animation3 = bodymovin.loadAnimation({
-            container: document.getElementById('trunkAnimation3'), // Required
-            path: 'img/tronc_anim3.json', // Required
-            renderer: 'svg/canvas/html', // Required
-            loop: false, // Optional
-            autoplay: false, // Optional
-            name: "animationName", // Name for future reference. Optional.
+            container: document.getElementById('trunkAnimation3'),
+            path: 'img/trunk/tronc_anim3.json',
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            name: "animationName",
         });
         this.animation4 = bodymovin.loadAnimation({
-            container: document.getElementById('trunkAnimation4'), // Required
-            path: 'img/tronc_anim4.json', // Required
-            renderer: 'svg/canvas/html', // Required
-            loop: false, // Optional
-            autoplay: false, // Optional
-            name: "animationName", // Name for future reference. Optional.
+            container: document.getElementById('trunkAnimation4'),
+            path: 'img/trunk/tronc_anim4.json',
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            name: "animationName",
         });
 
+        this.animation1.setSpeed(0.9);
+        this.animation2.setSpeed(0.9);
+        this.animation3.setSpeed(0.9);
+        this.animation4.setSpeed(0.9);
 
-/*
-
-        setTimeout(function () {
-            this.animation1.play()
-        }.bind(this), 2000);
-
-        setTimeout(function () {
-            document.getElementById('trunkAnimation1').style.display = 'none';
-        }, 3000);
-
-        setTimeout(function () {
-            animation2.play()
-        }, 4000);
-
-        setTimeout(function () {
-            document.getElementById('trunkAnimation2').style.display = 'none';
-        }, 5000);
-
-        setTimeout(function () {
-            animation3.play()
-        }, 6000);
-
-
-        setTimeout(function () {
-            document.getElementById('trunkAnimation3').style.display = 'none';
-        }, 7000);
-
-        setTimeout(function () {
-            animation4.play()
-        }, 8000);
-*/
 
 
     },
@@ -171,8 +143,6 @@ App.prototype = {
             let currentSecondDecimal = Math.floor( currentSecond / 10 );
 
 
-
-
            //Seconds with 2 numbers
             //currentSecond = currentSecond < 10 ? '0' + currentSecond.toString() : currentSecond.toString();
             //this.timerUi.innerText = currentMinute + ":" + currentSecond;
@@ -182,12 +152,10 @@ App.prototype = {
             this.timerSecondeDecimalUi.innerText = currentSecondDecimal;
             this.timerSecondeUnitUi.innerText = currentSecondUnit;
 
-
-
             this.timerArbreUi.innerText = this.timer * (2400/60);
 
             this.timer++;
-        }.bind(this), 1000)
+        }.bind(this), 1000);
     },
 
 
@@ -217,7 +185,7 @@ App.prototype = {
     onKeyDown: function(e) {
 
         if (e.code === "Space") {
-
+            console.log(this.imgIndex);
 
             if (this.imgIndex === 1) {
                 this.animation1.play();
@@ -241,14 +209,19 @@ App.prototype = {
 
             if (this.imgIndex === 4) {
                 this.animation4.play();
-               /* setTimeout(function () {
-                    document.getElementById('trunkAnimation4').style.display = 'none';
-                    document.querySelector("svg g[data-name=\"" + (this.imgIndex + 1) + "\"]").style.display = "initial";
-
-                }.bind(this), 1000)*/
             }
 
             if (this.imgIndex === 5) {
+                /*const svgTrunksDocument = document.querySelector("object#trunks").contentDocument;
+
+                let gs = svgTrunksDocument.querySelectorAll("svg g > g");
+                for (let i = 0; i < gs.length; i++){
+                    let g = gs[i];
+                    g.style.opacity = "0";
+                    //g.style.display = "initial";
+
+                }*/
+
                 document.getElementById('trunkAnimation4').style.display = 'none';
                 document.querySelector("svg g[data-name=\"" + (this.imgIndex + 1) + "\"]").style.display = "initial";
             }
@@ -271,6 +244,9 @@ App.prototype = {
 
 
             if (this.imgIndex > 5 && this.imgIndex <= this.nbImg) {
+
+
+
                 console.log(" svg g[data-name=\"" + (this.imgIndex) + "\"]");
                 document.querySelector("svg g[data-name=\"" + (this.imgIndex) + "\"]").style.display = "initial";
                 document.querySelector("svg g[data-name=\"" + (this.imgIndex - 1) + "\"]").style.display = "none";
