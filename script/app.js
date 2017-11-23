@@ -194,8 +194,13 @@ App.prototype = {
     onKeyDown: function(e) {
 
         if (e.code === "Space") {
-            console.log(this.imgIndex);
+            //console.log(this.imgIndex);
             this.imgIndex++;
+
+            let audios = document.querySelectorAll("audio");
+
+           console.log(Math.floor(Math.random() * (audios.length)) );
+            audios[Math.floor(Math.random() * (audios.length - 1))].play();
 
             //Update Ui
             if (this.imgIndex % 2 === 0){

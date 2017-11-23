@@ -81,7 +81,8 @@ svg#trunks {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform : translateX(-50.5%) translateY(-50%);
+  transform : translateX(-50%) translateY(-50%);
+  //opacity: 0.3;
 
   & > g > g {
     display: none;
@@ -119,4 +120,9 @@ object#trunks {
 
   //width: 100%;
   min-height: 100vh;
+}
+
+
+audio {
+  display: none;
 }
