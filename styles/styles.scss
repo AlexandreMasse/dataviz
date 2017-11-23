@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'MyriadPro';
+  src: url('../font/Myriad-Pro.ttf')  format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MyriadPro';
+  src: url('../font/Myriad-Pro-Bold.ttf')  format('truetype');
+  font-weight: bold;
+}
+
+
+
+
 html, body {
   width: 100vw;
   height: 100vh;
@@ -7,6 +23,7 @@ html, body {
 
 body {
   overflow : hidden;
+  font-family: MyriadPro, sans-serif;
 }
 
 body > div {

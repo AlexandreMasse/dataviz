@@ -187,7 +187,7 @@ App.prototype = {
     },
 
     addListener: function() {
-        window.addEventListener("keydown", this.throttle(this.onKeyDown.bind(this), 250))
+        window.addEventListener("keydown", this.throttle(this.onKeyDown.bind(this), 300))
     },
 
 
