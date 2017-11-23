@@ -1,9 +1,10 @@
 function App() {
-    this.imgIndex = 1;
+    this.imgIndex = 0;
     this.yearIndex = 0;
     this.nbImg = 50;
     this.zIndex = 1;
     this.timer = 0;
+    this.treeIndex = 1;
 
     //Data
     this.data = new Data();
@@ -122,6 +123,14 @@ App.prototype = {
         });
 
          new Odometer({
+            el: this.arbreUi,
+            value: 0,
+            duration: 80,
+            format: '',
+            theme: 'minimal',
+        });
+
+         new Odometer({
             el: this.timerArbreUi,
             value: 0,
             duration: 80,
@@ -186,32 +195,50 @@ App.prototype = {
 
         if (e.code === "Space") {
             console.log(this.imgIndex);
+            this.imgIndex++;
+
+            //Update Ui
+            if (this.imgIndex % 2 === 0){
+                console.log('paire !');
+                this.yearIndex++;
+                this.updateUiData(this.yearIndex);
+            }
 
             if (this.imgIndex === 1) {
                 this.animation1.play();
-                setTimeout(function () {
+                /*setTimeout(function () {
                     document.getElementById('trunkAnimation1').style.display = 'none';
-                }, 1000)
+                }, 1000)*/
             }
 
             if (this.imgIndex === 2) {
+                this.animation1.destroy();
                 this.animation2.play();
-                setTimeout(function () {
+
+               /* setTimeout(function () {
                     document.getElementById('trunkAnimation2').style.display = 'none';
-                }, 1000)
+                }, 1000)*/
             }
             if (this.imgIndex === 3) {
+                this.animation2.destroy();
                 this.animation3.play();
-                setTimeout(function () {
+                /*setTimeout(function () {
                     document.getElementById('trunkAnimation3').style.display = 'none';
-                }, 1000)
+                }, 1000)*/
             }
 
             if (this.imgIndex === 4) {
+                this.animation3.destroy();
                 this.animation4.play();
+
+               /* setTimeout(function () {
+                    document.getElementById('trunkAnimation4').style.display = 'none';
+                    document.querySelector("svg#trunks g[data-name=\"" + (this.imgIndex + 1) + "\"]").style.display = "initial";
+                }.bind(this), 1000)*/
             }
 
             if (this.imgIndex === 5) {
+
                 /*const svgTrunksDocument = document.querySelector("object#trunks").contentDocument;
 
                 let gs = svgTrunksDocument.querySelectorAll("svg g > g");
@@ -222,48 +249,46 @@ App.prototype = {
 
                 }*/
 
-                document.getElementById('trunkAnimation4').style.display = 'none';
-                document.querySelector("svg g[data-name=\"" + (this.imgIndex + 1) + "\"]").style.display = "initial";
+                this.animation4.destroy();
+
+
+                document.querySelector("svg#trunks g[data-name=\"" + (this.imgIndex + 1) + "\"]").style.display = "initial";
             }
 
-
-            if (this.imgIndex % 2 === 0){
-                console.log('paire !');
-                this.yearIndex++;
-                this.updateUiData(this.yearIndex);
-
-            }
-
-           /* if (this.imgIndex <= this.nbImg - 4) {
-                console.log(" svg g[data-name=\"" + (this.imgIndex + 5) + "\"]");
-                document.querySelector("svg g[data-name=\"" + (this.imgIndex + 5) + "\"]").style.display = "initial";
-                document.querySelector("svg g[data-name=\"" + (this.imgIndex + 5 - 1) + "\"]").style.display = "none";
-                this.imgIndex++;
-            }*/
 
 
 
             if (this.imgIndex > 5 && this.imgIndex <= this.nbImg) {
 
-
-
                 console.log(" svg g[data-name=\"" + (this.imgIndex) + "\"]");
-                document.querySelector("svg g[data-name=\"" + (this.imgIndex) + "\"]").style.display = "initial";
-                document.querySelector("svg g[data-name=\"" + (this.imgIndex - 1) + "\"]").style.display = "none";
+                document.querySelector("svg#trunks g[data-name=\"" + (this.imgIndex + 1) + "\"]").style.display = "initial";
+                document.querySelector("svg#trunks g[data-name=\"" + (this.imgIndex) + "\"]").style.display = "none";
 
             }
 
 
+
+
+
            /* this.body.children[(this.body.children.length - this.imgIndex)].style.zIndex = this.zIndex;
             this.zIndex++;*/
-
            /*
 
             if (this.imgIndex > this.nbImg) {
                 this.imgIndex = 1
             }*/
 
-            this.imgIndex++;
+
+            if (this.imgIndex % 2 === 1 && this.imgIndex > 5 && this.imgIndex <= this.nbImg){
+
+                document.querySelector("svg#background g[data-name=\"arbre " + this.treeIndex + "\"]").style.display = "none";
+
+                this.treeIndex++;
+            }
+
+
+
+            //this.imgIndex++;
         }
 
     },
