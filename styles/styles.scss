@@ -29,11 +29,6 @@ body {
     width: 100%;
     height: 100%;
     position: absolute;
-    /* background-image: url("../img/1.JPG");
-     background-size: contain;
-     background-repeat: no-repeat;
-     background-position: center;
-     background-attachment: fixed;*/
 
   }
 
@@ -159,7 +154,10 @@ body {
 
   .spanContainer {
     overflow: hidden;
-    height: 150px;
+    //height: 150px;
+    height: 130px;
+    position: relative;
+    top:-15px;
     span {
       font-size: 125px;
     }
@@ -203,6 +201,7 @@ svg#trunks {
   transition : transform 1.5s cubic-bezier(0.42, 0.18, 0.31, 0.99);
   //opacity: 0.3;
 
+
   & > g > g {
     display: none;
   }
@@ -219,6 +218,7 @@ svg#trunks {
 
   svg > g {
     clip-path: none;
+
   }
 }
 
@@ -230,7 +230,7 @@ svg#trunks {
   justify-content: center;
   text-align: center;
 
-  background-color: rgba(0, 0, 0, 0.30);
+  background-color: rgba(16, 34, 32, 0.59);
   opacity: 0;
   pointer-events: none;
 
@@ -251,22 +251,33 @@ svg#trunks {
 
   p#timerArbre {
     font-size: 125px;
+
   }
 
   p#endParagraphe {
     margin: 0;
     font-size: 42px;
     font-weight: bold;
+
+    position: relative;
+    top: 20px;
   }
 
   p#timer {
-  display: none;
-   }
+    display: none;
+  }
+
+  p#credits {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10%;
+
+
+  }
 
 }
-
-
-
 
 
 audio {

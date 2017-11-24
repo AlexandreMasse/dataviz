@@ -83,8 +83,7 @@ App.prototype = {
         new Odometer({
             el: this.yearUi,
             value: 1990,
-            duration: 3000,
-
+            duration: 135,
             format: '',
             theme: 'minimal',
         });
@@ -125,7 +124,7 @@ App.prototype = {
          new Odometer({
             el: this.arbreUi,
             value: 593,
-            duration: 80,
+            duration: 135,
             format: '',
             theme: 'minimal',
         });
@@ -193,10 +192,13 @@ App.prototype = {
     onKeyDown: function(e) {
 
         if (e.code === "Space") {
-            console.log("indexImg", this.imgIndex);
             this.imgIndex++;
 
-            if (this.imgIndex <= 0) {
+            console.log("indexImg", this.imgIndex);
+
+
+
+            if (this.imgIndex <= 0 ) {
 
                 document.querySelector("#startContainer").classList.add("animate");
 
@@ -216,7 +218,7 @@ App.prototype = {
 
             }
 
-            if (this.imgIndex > 0) {
+            if (this.imgIndex > 0 && this.imgIndex <= this.nbImg) {
 
                 //help hide
                 document.querySelector("#helpContainer").classList.remove("animate");
@@ -313,8 +315,15 @@ App.prototype = {
                     this.treeIndex++;
                 }
 
+
                 if (this.imgIndex === this.nbImg) {
                     console.log('animation');
+
+
+                    document.querySelector("#arbre").classList.remove("animate");
+
+                    document.querySelector("#year").classList.remove("animate");
+
                     document.querySelector("svg#trunks").classList.add("animate");
 
                     document.querySelector("#endContainer").classList.add("animate");
